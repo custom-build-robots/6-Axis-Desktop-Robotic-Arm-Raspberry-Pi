@@ -1,75 +1,77 @@
+import time
+import json
+
 from flask import Flask
 from flask import request
+from flask_cors import CORS
 
-import time
-#import atexit
-
-# Importiere die Adafruit PCA9685 Bibliothek
 import Adafruit_PCA9685
 
-# Initialise the PCA9685 using the default address (0x40).
-PCA9685_pwm = Adafruit_PCA9685.PCA9685()
+pwm = Adafruit_PCA9685.PCA9685()
+pwm.set_pwm_freq(60)
 
-# Alternatively specify a different address and/or bus:
-#pwm = Adafruit_PCA9685.PCA9685(address=0x41, busnum=2)
+# load servo config
+with open('config.json') as f:
+    servos_dict = json.load(f)
 
-# Set frequency to 100hz, good for l298n h-bridge.
-PCA9685_pwm.set_pwm_freq(60)
+app = Flask(__name__, static_url_path='/static')
+CORS(app)
 
-# Configure min and max servo pulse lengths
-servo_min = 150  # Min pulse length out of 4096
-servo_max = 600  # Max pulse length out of 4096
-
-app = Flask(__name__)
 
 @app.route("/")
 def web_interface():
-  html = open("index.html")
-  response = html.read().replace('\n', '')
-  html.close()
-  return response
+    html = open("index.html")
+    calibrate()
+    response = html.read().replace('\n', '')
+    html.close()
+    return response
 
-@app.route("/set_servo1")  
-def set_servo1():  
-  speed = request.args.get("speed")
-  print "Received " + str(speed)
-  PCA9685_pwm.set_pwm(0, 0, int(speed))
-  return "Received " + str(speed)   
-  
-@app.route("/set_servo2")  
-def set_servo2():  
-  speed = request.args.get("speed")
-  print "Received " + str(speed)
-  PCA9685_pwm.set_pwm(1, 0, int(speed))  
-  return "Received " + str(speed)  
 
-@app.route("/set_servo3")  
-def set_servo3():  
-  speed = request.args.get("speed")
-  print "Received " + str(speed)
-  PCA9685_pwm.set_pwm(2, 0, int(speed))  
-  return "Received " + str(speed) 
+@app.route("/get-default")
+def get_default():
+    return servos_dict
 
-@app.route("/set_servo4")  
-def set_servo4():  
-  speed = request.args.get("speed")
-  print "Received " + str(speed)
-  PCA9685_pwm.set_pwm(3, 0, int(speed))  
-  return "Received " + str(speed) 
- 
-@app.route("/set_servo5")  
-def set_servo5():  
-  speed = request.args.get("speed")
-  print "Received " + str(speed)
-  PCA9685_pwm.set_pwm(4, 0, int(speed))  
-  return "Received " + str(speed) 
 
-@app.route("/set_servo6")  
-def set_servo6():  
-  speed = request.args.get("speed")
-  print "Received " + str(speed)
-  PCA9685_pwm.set_pwm(5, 0, int(speed))  
-  return "Received " + str(speed)   
-  
-if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=8181, debug=True)
+@app.route("/calibrate", methods=['POST'])
+def calibrate():
+    # calibration
+    print('Calibrate robot ....')
+    try:
+        for servo in servos_dict['servos']:
+            print('Calibrate Servo {}: {} with default value: {}'.format(servo['id'], servo['name'],
+                                                                         servo['values']['default_value']))
+            pwm.set_pwm(servo['id'], 0, servo['values']['default_value'])
+            time.sleep(2)
+    except Exception as e:
+        print(e)
+    html = open("index.html")
+    response = html.read().replace('\n', '')
+    html.close()
+    return response
+
+
+@app.route("/set_servo")
+def set_servo():
+    speed = int(request.args.get("speed"))
+    servo = request.args.get("servo")
+    low_value = 0
+    high_value = 0
+    servo_id = ''
+
+    for item in servos_dict['servos']:
+        if item['name'] == servo:
+            servo_id = int(item['id'])
+            low_value = int(item['values']['low_value'])
+            high_value = int(item['values']['high_value'])
+
+    print('Configure servo: {} ...'.format(servo))
+    print('Low: {} | High: {}'.format(low_value, high_value))
+    print('Received value: {}'.format(speed))
+
+    if speed > high_value or speed < low_value:
+        print('Value: {} too low or too high'.format(speed))
+        return "Value too low or too high"
+    else:
+        print('Set value: {}'.format(speed))
+        pwm.set_pwm(servo_id, 0, speed)
+    return "Received " + str(speed)

@@ -1,0 +1,58 @@
+{
+    "servos": [
+        {
+            "name": "UNDER_ARM_DOWN_UP",
+            "id": 0,
+            "values": {
+                "default_value": 450,
+                "low_value": 350,
+                "high_value": 450
+            }
+        },
+        {
+            "name": "BODY_LEFT_RIGHT",
+            "id": 1,
+            "values": {
+                "default_value": 390,
+                "low_value": 150,
+                "high_value": 600
+            }
+        },
+        {
+            "name": "UPPER_ARM_DOWN_UP",
+            "id": 3,
+            "values": {
+                "default_value": 200,
+                "low_value": 150,
+                "high_value": 400
+            }
+        },
+        {
+            "name": "UPPER_ARM_ANGLE",
+            "id": 4,
+            "values": {
+                "default_value": 350,
+                "low_value": 150,
+                "high_value": 600
+            }
+        },
+        {
+            "name": "HEAD_LEFT_RIGHT",
+            "id": 5,
+            "values": {
+                "default_value": 350,
+                "low_value": 150,
+                "high_value": 600
+            }
+        },
+        {
+            "name": "HEAD_DOWN_UP",
+            "id": 6,
+            "values": {
+                "default_value": 150,
+                "low_value": 150,
+                "high_value": 350
+            }
+        }
+    ]
+}
