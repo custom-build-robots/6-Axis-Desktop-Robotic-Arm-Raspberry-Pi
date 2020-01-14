@@ -1,154 +1,66 @@
-<!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <title>Control robot-arm</title>
+</head>
 <body>
 
-<h1>Robot Arm Web Browser Control</h1>
-<p>Drag the slider to move the servo.</p>
+<div class="container">
+    <form action="/calibrate" method="post" id="form1">
+        <div class="jumbotron">
+            <h1 class="display-4">Robot Arm Web Browser Control</h1>
+            <p class="lead">Slide to control</p>
+            <p class="lead">
+                <button type="submit" class="btn btn-primary btn-lg" form="form1" value="Submit">Calibrate</button>
+            </p>
+        </div>
+    </form>
+    <div id="servo1" class="row">
+        <label for="customRange2">Servo 1</label>
+        <input type="range" id="UNDER_ARM_DOWN_UP" class="custom-range" min="350" max="450" value="0" step="1"
+               oninput="servo(slider1, output1)">
+        <p>Value servo1: <span id="UNDER_ARM_DOWN_UP_value"></span></p>
+    </div>
 
-<div id="servo1">
-  <p>Servo 1</p>
-  <input type="range" min="150" max="600" value="0" id="range1" oninput="servo1()">
-  <p>Value servo1: <span id="range1_value"></span></p>
+    <div id="servo2" class="row">
+        <p>Servo 2</p>
+        <input type="range" id="BODY_LEFT_RIGHT" class="custom-range" min="150" max="600" value="0" step="1"
+               oninput="servo(slider2, output2)">
+        <p>Value servo2: <span id="BODY_LEFT_RIGHT_value"></span></p>
+    </div>
+
+    <div id="servo3" class="row">
+        <p>Servo 3</p>
+        <input type="range" id="UPPER_ARM_DOWN_UP" class="custom-range" min="150" max="400" value="0" step="1"
+               oninput="servo(slider3, output3)">
+        <p>Value servo3: <span id="UPPER_ARM_DOWN_UP_value"></span></p>
+    </div>
+
+    <div id="servo4" class="row">
+        <p>Servo 4</p>
+        <input type="range" id="UPPER_ARM_ANGLE" class="custom-range" min="150" max="600" value="0" step="1"
+               oninput="servo(slider4, output4)">
+        <p>Value servo4: <span id="UPPER_ARM_ANGLE_value"></span></p>
+    </div>
+
+    <div id="servo5" class="row">
+        <p>Servo 5</p>
+        <input type="range" id="HEAD_LEFT_RIGHT" class="custom-range" min="150" max="600" value="0" step="1"
+               oninput="servo(slider5, output5)">
+        <p>Value servo5: <span id="HEAD_LEFT_RIGHT_value"></span></p>
+    </div>
+
+    <div id="servo6" class="row">
+        <p>Servo 6</p>
+        <input type="range" id="HEAD_DOWN_UP" class="custom-range" min="150" max="350" value="0" step="1"
+               oninput="servo(slider6, output6)">
+        <p>Value servo6: <span id="HEAD_DOWN_UP_value"></span></p>
+    </div>
 </div>
-
-<div id="servo2">
-  <p>Servo 2</p>
-  <input type="range" min="150" max="600" value="0" id="range2" oninput="servo2()">
-  <p>Value servo2: <span id="range2_value"></span></p>  
-</div>
-
-<div id="servo3">
-  <p>Servo 3</p>
-  <input type="range" min="150" max="600" value="0" id="range3" oninput="servo3()">
-  <p>Value servo1: <span id="range3_value"></span></p>
-</div>
-
-<div id="servo4">
-  <p>Servo 4</p>
-  <input type="range" min="150" max="600" value="0" id="range4" oninput="servo4()">
-  <p>Value servo2: <span id="range4_value"></span></p>  
-</div>
-
-<div id="servo5">
-  <p>Servo 5</p>
-  <input type="range" min="150" max="600" value="0" id="range5" oninput="servo5()">
-  <p>Value servo1: <span id="range5_value"></span></p>
-</div>
-
-<div id="servo6">
-  <p>Servo 6</p>
-  <input type="range" min="150" max="600" value="0" id="range6" oninput="servo6()">
-  <p>Value servo2: <span id="range6_value"></span></p>  
-</div>
-
-<script>
-var slider1 = document.getElementById("range1");
-var output1 = document.getElementById("range1_value");
-output1.innerHTML = slider1.value;
-
-function servo1()
-{
-  output1.innerHTML = slider1.value;
-  var xhttp1 = new XMLHttpRequest();
-  xhttp1.onreadystatechange = function servo1() {
-    if (this.readyState == 4 && this.status == 200) {
-    }
-  };
-  xhttp1.open("GET", "http://raspberrypi:8181/set_servo1?speed=" + slider1.value, true);
-  xhttp1.send();
-}
-</script>
-
-<script>
-var slider2 = document.getElementById("range2");
-var output2 = document.getElementById("range2_value");
-output2.innerHTML = slider2.value;
-
-function servo2()
-{
-  output2.innerHTML = slider2.value;
-  var xhttp2 = new XMLHttpRequest();
-  xhttp2.onreadystatechange = function servo2() {
-    if (this.readyState == 4 && this.status == 200) {
-    }
-  };
-  xhttp2.open("GET", "http://raspberrypi:8181/set_servo2?speed=" + slider2.value, true);
-  xhttp2.send();
-}
-</script>
-
-<script>
-var slider3 = document.getElementById("range3");
-var output3 = document.getElementById("range3_value");
-output3.innerHTML = slider3.value;
-
-function servo3()
-{
-  output3.innerHTML = slider3.value;
-  var xhttp3 = new XMLHttpRequest();
-  xhttp3.onreadystatechange = function servo3() {
-    if (this.readyState == 4 && this.status == 200) {
-    }
-  };
-  xhttp3.open("GET", "http://raspberrypi:8181/set_servo3?speed=" + slider3.value, true);
-  xhttp3.send();
-}
-</script>
-
-<script>
-var slider4 = document.getElementById("range4");
-var output4 = document.getElementById("range4_value");
-output4.innerHTML = slider4.value;
-
-function servo4()
-{
-  output4.innerHTML = slider4.value;
-  var xhttp4 = new XMLHttpRequest();
-  xhttp4.onreadystatechange = function servo4() {
-    if (this.readyState == 4 && this.status == 200) {
-    }
-  };
-  xhttp4.open("GET", "http://raspberrypi:8181/set_servo4?speed=" + slider4.value, true);
-  xhttp4.send();
-}
-</script>
-
-<script>
-var slider5 = document.getElementById("range5");
-var output5 = document.getElementById("range5_value");
-output5.innerHTML = slider5.value;
-
-function servo5()
-{
-  output5.innerHTML = slider5.value;
-  var xhttp5 = new XMLHttpRequest();
-  xhttp5.onreadystatechange = function servo5() {
-    if (this.readyState == 4 && this.status == 200) {
-    }
-  };
-  xhttp5.open("GET", "http://raspberrypi:8181/set_servo5?speed=" + slider5.value, true);
-  xhttp5.send();
-}
-</script>
-
-<script>
-var slider6 = document.getElementById("range6");
-var output6 = document.getElementById("range6_value");
-output6.innerHTML = slider6.value;
-
-function servo6()
-{
-  output6.innerHTML = slider6.value;
-  var xhttp6 = new XMLHttpRequest();
-  xhttp6.onreadystatechange = function servo6() {
-    if (this.readyState == 4 && this.status == 200) {
-    }
-  };
-  xhttp6.open("GET", "http://raspberrypi:8181/set_servo6?speed=" + slider6.value, true);
-  xhttp6.send();
-}
-</script>
-
+<script src="static/js/jquery.min.js"></script>
+<script src="static/js/bootstrap.min.js"></script>
+<script src="static/js/popper.min.js"></script>
+<script src="static/js/main.js"></script>
 </body>
 </html>
-

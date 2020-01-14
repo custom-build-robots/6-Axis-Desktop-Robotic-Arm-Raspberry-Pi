@@ -12,3 +12,15 @@ The picture below shows the easy to use web interface.
 
 ## Step by Step guide
 To read more about this project just visit my blog: https://custom-build-robots.com/raspberry-pi-robot-cars/sainsmart-6-axis-desktop-robotic-arm-raspberry-pi/9497?lang=en
+
+## Settings to start
+check and change personal settings in config.json
+
+## Requirements
+- python3
+- pip
+- pipenv
+
+## Installation
+- pipenv install
+- ./run.sh
