@@ -1,4 +1,4 @@
-const url = "http://raspberrypi:8080";
+const url = window.location.protocol + '//' + window.location.hostname + ':' + location.port;
 const route_servo = "/set_servo";
 const speed_param = "?speed=";
 const servo_param = "&servo=";

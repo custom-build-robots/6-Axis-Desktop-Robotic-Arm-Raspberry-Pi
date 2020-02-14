@@ -17,44 +17,44 @@
         </div>
     </form>
     <div id="servo1" class="row">
-        <label for="customRange2">Servo 1</label>
+        <p>Servo 1</p>
         <input type="range" id="UNDER_ARM_DOWN_UP" class="custom-range" min="350" max="450" value="0" step="1"
-               oninput="servo(slider1, output1)">
+               oninput="servo(this.id, this.value)">
         <p>Value servo1: <span id="UNDER_ARM_DOWN_UP_value"></span></p>
     </div>
 
     <div id="servo2" class="row">
         <p>Servo 2</p>
         <input type="range" id="BODY_LEFT_RIGHT" class="custom-range" min="150" max="600" value="0" step="1"
-               oninput="servo(slider2, output2)">
+               oninput="servo(this.id, this.value)">
         <p>Value servo2: <span id="BODY_LEFT_RIGHT_value"></span></p>
     </div>
 
     <div id="servo3" class="row">
         <p>Servo 3</p>
         <input type="range" id="UPPER_ARM_DOWN_UP" class="custom-range" min="150" max="400" value="0" step="1"
-               oninput="servo(slider3, output3)">
+               oninput="servo(this.id, this.value)">
         <p>Value servo3: <span id="UPPER_ARM_DOWN_UP_value"></span></p>
     </div>
 
     <div id="servo4" class="row">
         <p>Servo 4</p>
         <input type="range" id="UPPER_ARM_ANGLE" class="custom-range" min="150" max="600" value="0" step="1"
-               oninput="servo(slider4, output4)">
+               oninput="servo(this.id, this.value)">
         <p>Value servo4: <span id="UPPER_ARM_ANGLE_value"></span></p>
     </div>
 
     <div id="servo5" class="row">
         <p>Servo 5</p>
         <input type="range" id="HEAD_LEFT_RIGHT" class="custom-range" min="150" max="600" value="0" step="1"
-               oninput="servo(slider5, output5)">
+               oninput="servoservo(this.id, this.value)">
         <p>Value servo5: <span id="HEAD_LEFT_RIGHT_value"></span></p>
     </div>
 
     <div id="servo6" class="row">
         <p>Servo 6</p>
         <input type="range" id="HEAD_DOWN_UP" class="custom-range" min="150" max="350" value="0" step="1"
-               oninput="servo(slider6, output6)">
+               oninput="servo(this.id, this.value)">
         <p>Value servo6: <span id="HEAD_DOWN_UP_value"></span></p>
     </div>
 </div>
