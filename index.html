@@ -57,6 +57,22 @@
                oninput="servo(this.id, this.value)">
         <p>Value servo6: <span id="HEAD_DOWN_UP_value"></span></p>
     </div>
+
+    <div id="servo7" class="row">
+        <p>Servo 7</p>
+        <input type="range" id="ARM" class="custom-range" min="150" max="350" value="0" step="1"
+               oninput="servo(this.id, this.value)">
+        <p>Value servo7: <span id="ARM_value"></span></p>
+    </div>
+
+    <div id="servo8" class="row">
+        <p>Servo 8</p>
+        <input type="range" id="GRIPPER" class="custom-range" min="150" max="350" value="0" step="1"
+               oninput="servo(this.id, this.value)">
+        <p>Value servo8: <span id="GRIPPER_value"></span></p>
+    </div>
+
+
 </div>
 <script src="static/js/jquery.min.js"></script>
 <script src="static/js/bootstrap.min.js"></script>

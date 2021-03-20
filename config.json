@@ -53,6 +53,24 @@
                 "low_value": 150,
                 "high_value": 350
             }
+        },
+        {
+            "name": "ARM",
+            "id": 8,
+            "values": {
+                "default_value": 330,
+                "low_value": 130,
+                "high_value": 580
+            }
+        },
+        {
+            "name": "GRIPPER",
+            "id": 11,
+            "values": {
+                "default_value": 220,
+                "low_value": 160,
+                "high_value": 350
+            }
         }
     ]
 }
